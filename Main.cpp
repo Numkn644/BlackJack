@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "Utility\Keyboard.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -8,6 +9,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	while (!ProcessMessage() && !ScreenFlip() && !ClearDrawScreen())
 	{
+		Keyboard::Instance()->update();
+		if (Keyboard::Instance()->get(KEY_INPUT_ESCAPE) == 1){ break; }
 
 	}
 
