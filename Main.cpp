@@ -4,8 +4,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	ChangeWindowMode(TRUE);
 	DxLib_Init();
+	SetDrawScreen(DX_SCREEN_BACK);
 
-	WaitKey();
+	while (!ProcessMessage() && !ScreenFlip() && !ClearDrawScreen())
+	{
+
+	}
 
 	DxLib_End();
 
