@@ -9,8 +9,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	while (!ProcessMessage() && !ScreenFlip() && !ClearDrawScreen())
 	{
+		/*キーボードアップデート*/
 		KeyboardInput::Instance()->update();
 		if (KeyboardInput::Instance()->get(KEY_INPUT_ESCAPE) == 1){ break; }
+
+		/*メイン処理*/
+
 
 	}
 
