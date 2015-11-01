@@ -22,10 +22,10 @@ public:
 	void turnOver();	/*カードをひっくり返す*/
 
 	/*セッタ*/
-	void setPos();		/*x,yを設定する*/
+	void setPos(int x, int y){ m_x = x; m_y = y; }		/*x,yを設定する*/
 
 	/*ゲッタ*/
-	int getNumber();	/*カードの数字を取得*/
-	bool getFace();		/*表裏の状態を取得*/
+	int getNumber(){return m_number;}	/*カードの数字を取得*/
+	bool getFace(){	return m_face;}		/*表裏の状態を取得*/
 };
 
