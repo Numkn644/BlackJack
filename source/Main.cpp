@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Utility\KeyboardInput.h"
 
+
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	ChangeWindowMode(TRUE);
