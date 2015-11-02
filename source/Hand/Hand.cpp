@@ -23,6 +23,11 @@ void Hand::initialize()
 	m_calcHand.clear();
 }
 
+void Hand::update()
+{
+	m_score = m_calc.calc(m_calcHand);
+}
+
 /*èD‚ÉƒJ[ƒh‚ğ‰Á‚¦‚é*/
 bool Hand::addHand(Card* card, int x, int y, bool turn)
 {
@@ -43,4 +48,9 @@ void Hand::draw()
 	};
 
 	std::for_each(m_hand.begin(), m_hand.end(), drawCard);
+}
+
+void Hand::drawScore(int y)
+{
+	DrawFormatString(200, y, 0xffffff, "Score = %d", m_score);
 }
