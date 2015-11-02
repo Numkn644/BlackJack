@@ -3,6 +3,7 @@
 #include "../Person/Dealer.h"
 #include "../Deck/Deck.h"
 #include "../Hand/Hand.h"
+#include "../Judge/Judge.h"
 #include "../Utility/KeyboardInput.h"
 
 class GameManager
@@ -13,6 +14,7 @@ private:
 	Deck *m_deck;		/*デッキ*/
 	Hand *m_playerHand;	/*プレイヤーの手札*/
 	Hand *m_dealerHand;	/*ディーラーの手札*/
+	Judge *m_judge;		/*判定*/
 
 public:
 	GameManager();

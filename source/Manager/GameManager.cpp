@@ -21,6 +21,8 @@ void GameManager::initialize()
 	m_playerHand = new Hand();
 	m_dealerHand = new Hand();
 
+	m_judge = new Judge();
+
 	m_playerHand->initialize();
 	m_dealerHand->initialize();
 
@@ -37,6 +39,9 @@ void GameManager::execute()
 
 	if (KeyboardInput::Instance()->get(KEY_INPUT_D) == 1){
 		if (m_dealer->hit(m_deck->handCard(), false)){ m_deck->popCard(); }
+	}
+	if (KeyboardInput::Instance()->get(KEY_INPUT_J) == 1){
+		m_player->setState(m_judge->execute(m_playerHand->getScore(), m_dealerHand->getScore()));
 	}
 
 	/*XV*/
@@ -55,4 +60,5 @@ void GameManager::finalize()
 	delete m_dealer;
 	delete m_playerHand;
 	delete m_dealerHand;
+	delete m_judge;
 }
