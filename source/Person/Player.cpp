@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player() : m_coins(5000)
+Player::Player() : m_coins(5000), m_state(NULL)
 {
 	
 }
@@ -9,7 +9,7 @@ Player::Player() : m_coins(5000)
 
 Player::~Player()
 {
-
+	delete m_state;
 }
 
 void Player::update()
@@ -27,4 +27,5 @@ void Player::draw()
 {
 	m_hand->draw();
 	m_hand->drawScore(460);
+	if (m_state){m_state->message();}
 }
