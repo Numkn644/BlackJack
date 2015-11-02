@@ -7,11 +7,13 @@ bool compCalc(const Card *a, const Card *b)
 
 Hand::Hand()
 {
+	
 }
 
 
 Hand::~Hand()
 {
+	
 }
 
 void Hand::initialize()
@@ -20,6 +22,7 @@ void Hand::initialize()
 	m_hand.clear();
 	m_calcHand.clear();
 }
+
 /*èD‚ÉƒJ[ƒh‚ğ‰Á‚¦‚é*/
 bool Hand::addHand(Card* card, int x, int y, bool turn)
 {
