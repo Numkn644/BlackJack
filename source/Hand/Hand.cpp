@@ -16,6 +16,7 @@ Hand::~Hand()
 	
 }
 
+
 void Hand::initialize()
 {
 	m_counter = 0;
