@@ -1,10 +1,6 @@
 #include "DxLib.h"
 #include "Utility\KeyboardInput.h"
-
-#include "Person\Player.h"
-#include "Person\Dealer.h"
-#include "Deck\Deck.h"
-#include "Hand\Hand.h"
+#include "Manager\GameManager.h"
 
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -14,23 +10,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	int handle = LoadGraph("image/backGround.png");
-	Deck m_deck;
-	Player m_player;
-	Dealer m_dealer;
-	Hand *m_playerHand;
-	Hand *m_dealerHand;
 
-	m_deck.construct();
+	GameManager *gameMgr;
+	gameMgr = new GameManager();
 
-	m_playerHand = new Hand();
-	m_player.setHand(m_playerHand);
-
-	m_dealerHand = new Hand();
-	m_dealer.setHand(m_dealerHand);
-
-	m_playerHand->initialize();
-	m_dealerHand->initialize();
-
+	/*‰Šú‰»ˆ—*/
+	gameMgr->initialize();
 
 	while (!ProcessMessage() && !ScreenFlip() && !ClearDrawScreen())
 	{
@@ -42,21 +27,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		DrawGraph(0, 0, handle, FALSE);
 
 		/*ƒƒCƒ“ˆ—*/
-		if (KeyboardInput::Instance()->get(KEY_INPUT_H) == 1){
-			if (m_player.hit(m_deck.handCard(), true)){ m_deck.popCard(); }
-		}
-
-		if (KeyboardInput::Instance()->get(KEY_INPUT_D) == 1){
-			if (m_dealer.hit(m_deck.handCard(), true)){ m_deck.popCard(); }
-		}
-
-		m_player.draw();
-		m_dealer.draw();
+		gameMgr->execute();
 
 	}
+	/*I—¹ˆ—*/
+	gameMgr->finalize();
+	delete gameMgr;
 
-	delete m_playerHand;
-	delete m_dealerHand;
 	DxLib_End();
 
 	return 0;
