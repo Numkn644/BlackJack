@@ -26,7 +26,7 @@ void Card::drawFace()
 /*カードの裏を描画*/
 void Card::drawBack(int handle)
 {
-	DrawGraph(m_x, m_y, m_handle, TRUE);
+	DrawGraph(m_x, m_y, handle, TRUE);
 }
 
 /*カードをひっくり返す*/
