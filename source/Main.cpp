@@ -2,6 +2,7 @@
 #include "Utility\KeyboardInput.h"
 
 #include "Person\Player.h"
+#include "Person\Dealer.h"
 #include "Deck\Deck.h"
 #include "Hand\Hand.h"
 
@@ -15,11 +16,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	int handle = LoadGraph("image/backGround.png");
 	Deck m_deck;
 	Player m_player;
-	Hand *m_hand;
+	Dealer m_dealer;
+	Hand *m_playerHand;
+	Hand *m_dealerHand;
 
 	m_deck.construct();
-	m_hand = new Hand();
-	m_player.setHand(m_hand);
+
+	m_playerHand = new Hand();
+	m_player.setHand(m_playerHand);
+
+	m_dealerHand = new Hand();
+	m_dealer.setHand(m_dealerHand);
+
+	m_playerHand->initialize();
+	m_dealerHand->initialize();
+
 
 	while (!ProcessMessage() && !ScreenFlip() && !ClearDrawScreen())
 	{
@@ -35,11 +46,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			if (m_player.hit(m_deck.handCard(), true)){ m_deck.popCard(); }
 		}
 
+		if (KeyboardInput::Instance()->get(KEY_INPUT_D) == 1){
+			if (m_dealer.hit(m_deck.handCard(), true)){ m_deck.popCard(); }
+		}
+
 		m_player.draw();
+		m_dealer.draw();
 
 	}
 
-	delete m_hand;
+	delete m_playerHand;
+	delete m_dealerHand;
 	DxLib_End();
 
 	return 0;
