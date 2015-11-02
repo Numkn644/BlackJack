@@ -39,6 +39,11 @@ void GameManager::execute()
 		if (m_dealer->hit(m_deck->handCard(), false)){ m_deck->popCard(); }
 	}
 
+	/*XV*/
+	m_player->update();
+	m_dealer->update();
+
+	/*•`‰æ*/
 	m_player->draw();
 	m_dealer->draw();
 }
