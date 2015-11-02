@@ -10,6 +10,7 @@ public:
 	Dealer();
 	~Dealer();
 public:
+	void update();	/*更新*/
 	bool hit(Card* card, bool turn);	/*ヒット*/
 	void draw();	/*プレイヤーの描画*/
 
