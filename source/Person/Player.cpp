@@ -12,6 +12,11 @@ Player::~Player()
 
 }
 
+void Player::update()
+{
+	m_hand->update();
+}
+
 bool Player::hit(Card* card, bool turn)
 {
 	if (m_hand->addHand(card, 200, 300, turn)){ return true; }
@@ -21,4 +26,5 @@ bool Player::hit(Card* card, bool turn)
 void Player::draw()
 {
 	m_hand->draw();
+	m_hand->drawScore(460);
 }

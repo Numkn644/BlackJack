@@ -11,6 +11,8 @@ public:
 	Player();
 	~Player();
 public:
+	//void bet();		/*ベット*/
+	void update();		/*データの更新*/
 	bool hit(Card* card, bool turn);	/*ヒット*/
 	void draw();	/*プレイヤーの描画*/
 
