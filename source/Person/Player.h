@@ -18,10 +18,12 @@ public:
 	void initialize();	/*初期化*/
 	void update();		/*データの更新*/
 	bool hit(Card* card, bool turn);	/*ヒット*/
+	void liquidate();	/*勝ち負けに応じて清算する*/
 	void draw();	/*プレイヤーの描画*/
 
 	/*セッタ*/
 	void setState(Issue* issue){ m_state = issue; }	/*勝ち負けを設定*/
+	void setBet(){ m_coins -= m_bets; }				/*所持金からBet額を引く*/
 
 };
 

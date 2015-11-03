@@ -35,6 +35,10 @@ void GameManager::execute()
 	m_dealer->update();
 	m_deck->update();
 
+	/*•`‰æ*/
+	m_player->draw();
+	m_dealer->draw();
+
 	/*ƒV[ƒ“‘JˆÚ*/
 	switch (m_scene){
 	case INIT:
@@ -47,7 +51,10 @@ void GameManager::execute()
 	case BET:
 		DrawFormatString(0, 460, 0xffffff, "BET‚µ‚Ä‚­‚¾‚³‚¢");
 		m_player->bet();
-		if (KeyboardInput::Instance()->get(KEY_INPUT_Q) == 1){ m_scene = DEAL; }
+		if (KeyboardInput::Instance()->get(KEY_INPUT_Q) == 1){
+			m_player->setBet();
+			m_scene = DEAL; 
+		}
 		drawState("TURN--->BET");
 		break;
 
@@ -83,6 +90,7 @@ void GameManager::execute()
 
 	case JUDGE:
 		m_player->setState(m_judge->execute(m_playerHand->getScore(), m_dealerHand->getScore()));
+		m_player->liquidate();
 		m_scene = RESULT;
 
 		drawState("TURN--->JUDGE");
@@ -94,9 +102,6 @@ void GameManager::execute()
 		drawState("TURN--->RESULT");
 		break;
 	}
-	/*•`‰æ*/
-	m_player->draw();
-	m_dealer->draw();
 }
 
 void GameManager::finalize()

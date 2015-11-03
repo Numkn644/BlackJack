@@ -8,5 +8,6 @@ public:
 	~Win();
 public:
 	void message();
+	int liquidate(int bet);
 };
 

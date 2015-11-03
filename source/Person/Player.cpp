@@ -36,10 +36,17 @@ bool Player::hit(Card* card, bool turn)
 	return false;
 }
 
+void Player::liquidate()
+{
+	m_coins += m_state->liquidate(m_bets);
+}
+
 void Player::draw()
 {
 	m_hand->draw();
 	m_hand->drawScore(460);
 	if (m_state){m_state->message();}
-	DrawFormatString(200, 360, 0xffffff, "BET : %d", m_bets);
+	DrawFormatString(200, 380, 0xffffff, "BET : %d", m_bets);
+	DrawFormatString(200, 400, 0xffffff, "Coins : %d", m_coins);
+
 }
