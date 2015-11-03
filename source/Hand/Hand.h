@@ -24,6 +24,7 @@ public:
 	void initialize();	/*手札の初期化*/
 	void update();		/*データの更新*/
 	bool addHand(Card* card, int x, int y, bool turn);	/*手札にカードを加える*/
+	void turnToFace();	/*手札をまとめてひっくり返す*/
 	void draw();	/*手札を描画*/
 	void drawScore(int y);	/*スコアを描画*/
 

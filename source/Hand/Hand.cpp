@@ -41,6 +41,13 @@ bool Hand::addHand(Card* card, int x, int y, bool turn)
 	return true;
 }
 
+void Hand::turnToFace()
+{
+	std::for_each(m_hand.begin(), m_hand.end(), [](Card* card){
+		if (!card->getFace()){ card->turnOver(); }
+	});
+}
+
 void Hand::draw()
 {
 	auto drawCard = [&](Card* card){
