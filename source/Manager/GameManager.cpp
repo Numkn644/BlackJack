@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
 
-GameManager::GameManager()
+GameManager::GameManager() : m_scene(INIT)
 {
 }
 
@@ -23,9 +23,6 @@ void GameManager::initialize()
 
 	m_judge = new Judge();
 
-	m_playerHand->initialize();
-	m_dealerHand->initialize();
-
 	/*手札をセット*/
 	m_player->setHand(m_playerHand);
 	m_dealer->setHand(m_dealerHand);
@@ -33,21 +30,70 @@ void GameManager::initialize()
 
 void GameManager::execute()
 {
-	if (KeyboardInput::Instance()->get(KEY_INPUT_H) == 1){
-		if (m_player->hit(m_deck->handCard(), true)){ m_deck->popCard(); }
-	}
-
-	if (KeyboardInput::Instance()->get(KEY_INPUT_D) == 1){
-		if (m_dealer->hit(m_deck->handCard(), false)){ m_deck->popCard(); }
-	}
-	if (KeyboardInput::Instance()->get(KEY_INPUT_J) == 1){
-		m_player->setState(m_judge->execute(m_playerHand->getScore(), m_dealerHand->getScore()));
-	}
-
 	/*更新*/
 	m_player->update();
 	m_dealer->update();
+	m_deck->update();
 
+	/*シーン遷移*/
+	switch (m_scene){
+	case INIT:
+		m_player->initialize();
+		m_dealer->initialize();
+
+		m_scene = BET;
+		break;
+
+	case BET:
+		DrawFormatString(0, 460, 0xffffff, "BETしてください");
+		m_player->bet();
+		if (KeyboardInput::Instance()->get(KEY_INPUT_Q) == 1){ m_scene = DEAL; }
+		drawState("TURN--->BET");
+		break;
+
+	case DEAL:
+		/*プレイヤーに手札を配る*/
+		for (int i = 0; i < 2; i++){
+			if (m_player->hit(m_deck->handCard(), true)){ m_deck->popCard(); }
+		}
+		/*ディーラーに手札を配る*/
+		if (m_dealer->hit(m_deck->handCard(), true)){ m_deck->popCard(); }
+		if (m_dealer->hit(m_deck->handCard(), false)){ m_deck->popCard(); }
+
+		m_scene = PLAYER;
+		break;
+
+	case PLAYER:
+		if (KeyboardInput::Instance()->get(KEY_INPUT_H) == 1){
+			if (m_player->hit(m_deck->handCard(), true)){ m_deck->popCard(); }
+		}
+		if (m_player->vast() || m_player->stand()){ m_scene = DEALER; }
+
+		drawState("TURN--->PLAYER");
+		break;
+
+	case DEALER:
+		if (!m_dealer->moreLessSeventeen()){
+			if (m_dealer->hit(m_deck->handCard(), false)){ m_deck->popCard(); }
+		}
+		else if (m_dealer->stand() || m_dealer->vast() || m_dealer->moreLessSeventeen()){ m_scene = JUDGE; }
+		
+		drawState("TURN--->DEALER");
+		break;
+
+	case JUDGE:
+		m_player->setState(m_judge->execute(m_playerHand->getScore(), m_dealerHand->getScore()));
+		m_scene = RESULT;
+
+		drawState("TURN--->JUDGE");
+
+	case RESULT:
+		m_dealer->turn();
+		if (KeyboardInput::Instance()->get(KEY_INPUT_N) == 1){ m_scene = INIT; }
+		
+		drawState("TURN--->RESULT");
+		break;
+	}
 	/*描画*/
 	m_player->draw();
 	m_dealer->draw();
@@ -61,4 +107,9 @@ void GameManager::finalize()
 	delete m_playerHand;
 	delete m_dealerHand;
 	delete m_judge;
+}
+
+void GameManager::drawState(char *str)
+{
+	DrawFormatString(0, 0, 0xffffff, str);
 }
