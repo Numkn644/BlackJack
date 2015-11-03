@@ -69,6 +69,14 @@ void Deck::construct()
 	m_backHandle.backHandle = m_divHandle[14];	/*裏面イメージをロード*/
 }
 
+void Deck::update()
+{
+	if (m_deck.size() < 5){
+		initialize();
+		shuffle();
+	}
+}
+
 void Deck::shuffle()
 {
 	std::random_shuffle(m_deck.begin(), m_deck.end(), r);

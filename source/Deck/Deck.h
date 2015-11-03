@@ -33,6 +33,7 @@ public:
 	void shuffle();		/*デッキをシャッフル*/
 	Card* handCard();	/*カードを渡す*/
 	void popCard();		/*デッキからカードを取り出す*/
+	void update();		/*空になりそうになったらデッキを再構築*/
 
 };
 
