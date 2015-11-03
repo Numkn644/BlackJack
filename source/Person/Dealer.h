@@ -2,19 +2,17 @@
 #include "Person.h"
 #include "../Hand/Hand.h"
 
-class Dealer : Person
+class Dealer : public Person
 {
-private:
-	Hand *m_hand;
 public:
 	Dealer();
 	~Dealer();
 public:
+	void initialize();	/*初期化*/
 	void update();	/*更新*/
 	bool hit(Card* card, bool turn);	/*ヒット*/
-	void draw();	/*プレイヤーの描画*/
-
-	/*関連*/
-	void setHand(Hand *hand){ m_hand = hand; }	/*Handとの関連*/
+	bool moreLessSeventeen();		/*17以上かを判定*/
+	void turn();		/*手札を表にする*/
+	void draw();	/*ディーラーの描画*/
 };
 
