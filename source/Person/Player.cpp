@@ -9,7 +9,7 @@ Player::Player() : m_coins(5000), m_state(NULL)
 
 Player::~Player()
 {
-	delete m_state;
+
 }
 
 void Player::update()

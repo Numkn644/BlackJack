@@ -8,6 +8,7 @@ Judge::Judge()
 
 Judge::~Judge()
 {
+	delete whoDidWin;
 }
 
 /*”»’è*/
