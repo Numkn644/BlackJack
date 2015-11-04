@@ -16,7 +16,19 @@ void Draw::message()
 
 }
 
+void Draw::animation()
+{
+	m_animation->execute();
+	m_animation->draw();
+}
+
 int Draw::liquidate(int bet)
 {
 	return (bet);
+}
+
+void Draw::setAnimation(Animation *animation)
+{
+	m_animation = animation;
+	m_animation->initialize("image/Draw2.png");
 }

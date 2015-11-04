@@ -9,7 +9,7 @@ Player::Player() : m_coins(5000),m_bets(0), m_state(NULL)
 
 Player::~Player()
 {
-
+	
 }
 
 void Player::bet()
@@ -22,12 +22,18 @@ void Player::initialize()
 {
 	m_hand->initialize();
 	m_state = NULL;
+	m_stateAnimation = NULL;
 	m_bets = 0;
 }
 
 void Player::update()
 {
 	m_hand->update();
+}
+
+void Player::finalize()
+{
+	delete m_stateAnimation;
 }
 
 bool Player::hit(Card* card, bool turn)
@@ -48,5 +54,12 @@ void Player::draw()
 	if (m_state){m_state->message();}
 	DrawFormatString(200, 380, 0xffffff, "BET : %d", m_bets);
 	DrawFormatString(200, 400, 0xffffff, "Coins : %d", m_coins);
+	if (m_state){ m_state->animation(); }
 
+}
+void Player::setState(Issue* issue)
+{
+	m_state = issue;
+	m_stateAnimation = new Animation();
+	m_state->setAnimation(m_stateAnimation);
 }

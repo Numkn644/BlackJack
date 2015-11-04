@@ -97,7 +97,10 @@ void GameManager::execute()
 
 	case RESULT:
 		m_dealer->turn();
-		if (KeyboardInput::Instance()->get(KEY_INPUT_N) == 1){ m_scene = INIT; }
+		if (KeyboardInput::Instance()->get(KEY_INPUT_N) == 1){
+			m_scene = INIT; 
+			m_player->finalize();
+		}
 		
 		drawState("TURN--->RESULT");
 		break;
