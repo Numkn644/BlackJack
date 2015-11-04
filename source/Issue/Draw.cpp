@@ -12,7 +12,7 @@ Draw::~Draw()
 
 void Draw::message()
 {
-	DrawFormatString(200, 420, 0xffffff, "‚ ‚È‚½‚Ìˆø‚«•ª‚¯‚Å‚·");
+	DrawFormatString(200, 420, 0xffffff, "ˆø‚«•ª‚¯‚Å‚·");
 
 }
 
