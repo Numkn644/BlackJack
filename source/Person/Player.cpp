@@ -24,6 +24,7 @@ void Player::initialize()
 	m_state = NULL;
 	m_stateAnimation = NULL;
 	m_bets = 0;
+	m_buttonHandle = LoadGraph("image/testButton.png");
 }
 
 void Player::update()
@@ -52,7 +53,8 @@ void Player::draw()
 	m_hand->draw();
 	m_hand->drawScore(460);
 	if (m_state){m_state->message();}
-	DrawFormatString(200, 380, 0xffffff, "BET : %d", m_bets);
+	//DrawFormatString(200, 380, 0xffffff, "BET : %d", m_bets);
+	DrawGraph(200, 360, m_buttonHandle, TRUE);
 	DrawFormatString(200, 400, 0xffffff, "Coins : %d", m_coins);
 	if (m_state){ m_state->animation(); }
 
