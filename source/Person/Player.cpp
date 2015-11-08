@@ -9,7 +9,7 @@ Player::Player() : m_coins(5000),m_bets(0), m_state(NULL)
 
 Player::~Player()
 {
-	
+	DeleteGraph(m_buttonHandle);
 }
 
 void Player::bet()
