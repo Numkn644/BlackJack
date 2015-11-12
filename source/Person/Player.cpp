@@ -55,6 +55,7 @@ void Player::draw()
 	if (m_state){m_state->message();}
 	//DrawFormatString(200, 380, 0xffffff, "BET : %d", m_bets);
 	DrawGraph(200, 360, m_buttonHandle, TRUE);
+	DrawGraph(280, 360, m_buttonHandle, TRUE);
 	DrawFormatString(200, 400, 0xffffff, "Coins : %d", m_coins);
 	if (m_state){ m_state->animation(); }
 
