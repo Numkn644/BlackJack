@@ -9,6 +9,7 @@ class Player : public Person
 {
 private:
 	int m_buttonHandle;	/**/
+	int m_10ButtonHandle;
 
 	int m_coins;	/*ŠƒRƒCƒ“*/
 	int m_bets;		/*“q‹à*/

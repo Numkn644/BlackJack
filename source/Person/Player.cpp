@@ -10,6 +10,7 @@ Player::Player() : m_coins(5000),m_bets(0), m_state(NULL)
 Player::~Player()
 {
 	DeleteGraph(m_buttonHandle);
+	DeleteGraph(m_10ButtonHandle);
 }
 
 void Player::bet()
@@ -25,6 +26,7 @@ void Player::initialize()
 	m_stateAnimation = NULL;
 	m_bets = 0;
 	m_buttonHandle = LoadGraph("image/testButton.png");
+	m_10ButtonHandle = LoadGraph("image/+10Button.png");
 }
 
 void Player::update()
@@ -55,7 +57,7 @@ void Player::draw()
 	if (m_state){m_state->message();}
 	//DrawFormatString(200, 380, 0xffffff, "BET : %d", m_bets);
 	DrawGraph(200, 360, m_buttonHandle, TRUE);
-	DrawGraph(280, 360, m_buttonHandle, TRUE);
+	DrawGraph(280, 360, m_10ButtonHandle, TRUE);
 	DrawFormatString(200, 400, 0xffffff, "Coins : %d", m_coins);
 	if (m_state){ m_state->animation(); }
 
