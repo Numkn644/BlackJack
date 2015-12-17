@@ -30,7 +30,7 @@ public:
 
 	/*ƒZƒbƒ^*/
 	void setState(Issue* issue);	/*Ÿ‚¿•‰‚¯‚ğİ’è*/
-	void setBet(){ m_coins -= m_bets; }				/*Š‹à‚©‚çBetŠz‚ğˆø‚­*/
+	void setBet(){ m_coins -= m_bets; }		/*Š‹à‚©‚çBetŠz‚ğˆø‚­*/
 
 };
 
